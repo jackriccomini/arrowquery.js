@@ -3,14 +3,14 @@
 Response to [My other database is a compiler](https://blog.chiselstrike.com/my-other-database-is-a-compiler-10fd527a4d78).
 Parse and compile JavaScript arrow functions to SQL queries at runtime.
 
-## Transformation:
+## Transformation
 ```
 > const { sql } = require("./arrowquery.js");
 > console.log(sql(customers => customers.country == "Mexico" && customers.customerId > 5));
 SELECT * FROM customers WHERE country = 'Mexico' and customerId > 5;
 ```
 
-## Querying:
+## Querying
 ```
 > const db = require("better-sqlite3")("/tmp/Chinook_Sqlite.sqlite");
 > db.magic = query => db.prepare(sql(query)).all()
@@ -41,5 +41,5 @@ Cool that it's possible though.
 
 **How does it work?**
 
-Calling `.toString()` on a function lets you access its source code at runtime as string.
-Passing that code to a JavaScript parser lets you compile arbitrary parts of JavaScript to SQL (or anything).
+Calling `.toString()` on a function lets you access its source code at runtime.
+Passing that code to a JavaScript parser lets you compile arbitrary JavaScript functions to SQL (or anything).
